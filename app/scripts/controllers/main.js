@@ -8,48 +8,24 @@
  * Controller of the angGeocoderApp
  */
 angular.module('angGeocoderApp')
-    .controller('MainCtrl', function($scope, $log, $rootScope) {
-
-        function validateSchema(rows) {
-            var isValid = true;
-            // var requiredProperties = ['id', 'houseNumber', 'streetName', 'city', 'country'];
-            var requiredProperties = [0, 3, 4, 5, 6];
-
-            angular.forEach(rows, function(value, key) {
-                value[7] = true;
-                value[8] = '';
-
-                for (var i = 0; i < requiredProperties.length; i++) {
-                    var requiredProperty = requiredProperties[i];
-                    if (!value[requiredProperty]) {
-                        value[7] = false;
-                        value[8] = 'field is required';
-                        isValid = false;
-                        break;
-                    }
-                }
-            });
-
-            return isValid;
-        }
-
-        function processData(csv) {
-            var separator = ',';
-            var allTextLines = csv.split(/\r\n|\n/); // split on newline
-            var lines = [];
-            for (var i = 0; i < allTextLines.length; i++) {
-                var data = allTextLines[i].split(separator); // split CSV
-                lines.push(data);
-            }
-            return lines;
-        }
+    .controller('MainCtrl', function($scope, $log, $rootScope, utils) {
 
         function uploadFile() {
-            $scope.parsedCsv = processData($scope.uploadedFile);
-            if (validateSchema($scope.parsedCsv)) {
-                $log.info('validation successful. navigating to details page.');
-                // convert each address to geocoded lat/lon
-            }            
+            $rootScope.detailsData = null;
+            $scope.parsedCsv = utils.processData($scope.uploadedFile);
+            if (utils.validateSchema($scope.parsedCsv)) {
+
+                $log.info('validation successful. generating geocoded lat/lon');
+                utils.generateGeocodes($scope.parsedCsv)
+                    .then(function() {
+                        // all ok
+                        $log.info('aal izz well, need to go to next step');
+                        $rootScope.detailsData = $scope.parsedCsv;
+                    }, function(err) {
+                        $log.error('oops, geocode fail macha');
+                        $log.error(err);
+                    });
+            }
         }
 
         $scope.uploadedFile = null;
@@ -59,4 +35,5 @@ angular.module('angGeocoderApp')
         }
 
         $scope.uploadFile = uploadFile;
+        $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
     });

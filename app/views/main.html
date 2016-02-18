@@ -1,27 +1,21 @@
-<div class="panel panel-default">
-    <div class="panel-body">
-        <input type="file" file-reader="uploadedFile" />
-        <hr />
-        <button class="btn btn-success" ng-disabled="uploadDisabled()" ng-click="uploadFile()">Upload</button>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default text-center center-block">
+            <div class="panel-body">
+                <input type="file" file-reader="uploadedFile" />
+                <hr />
+                <button class="btn btn-success" ng-disabled="uploadDisabled()" ng-click="uploadFile()">Upload</button>
+            </div>
+        </div>
     </div>
 </div>
 <!-- <div class="panel panel-default">
     <div class="panel-body">
-        {{ uploadedFile || 'No data available' }}
-    </div>
-</div> -->
-<!-- <div class="panel panel-default">
-    <div class="panel-body">
-        {{ angular.toJson($scope.parsedCsv) }}
-    </div>
-</div> -->
-<div class="panel panel-default">
-    <div class="panel-body">
         <table class="table">
             <thead>
-                <!-- <tr>
+                <tr>
                     <th ng-repeat="header in parsedCsv[0]">{{header}}</th>                    
-                </tr> -->
+                </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="row in parsedCsv track by $index">
@@ -30,4 +24,9 @@
             </tbody>
         </table>
     </div>
-</div>
+</div> -->
+<!-- <div class="panel panel-default">
+    <div class="panel-body">
+        <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+    </div>
+</div> -->

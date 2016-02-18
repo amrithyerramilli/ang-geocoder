@@ -8,10 +8,10 @@
  * Controller of the angGeocoderApp
  */
 angular.module('angGeocoderApp')
-  .controller('AboutCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+    .controller('AboutCtrl', function() {
+        this.awesomeThings = [
+            'HTML5 Boilerplate',
+            'AngularJS',
+            'Karma'
+        ];
+    });

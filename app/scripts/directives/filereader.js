@@ -15,13 +15,16 @@ angular.module('angGeocoderApp')
             },
             link: function postLink(scope, element, attrs) {
                 element.bind("change", function(changeEvent) {
-                    var reader = new FileReader();
-                    reader.onload = function(loadEvent) {
-                        scope.$apply(function() {
-                            scope.fileReader = loadEvent.target.result;
-                        });
+                    if (changeEvent.target.files.length > 0) {
+                        var reader = new FileReader();
+                        reader.onload = function(loadEvent) {
+                            scope.$apply(function() {
+                                scope.fileReader = loadEvent.target.result;
+                            });
+                        }
+                        reader.readAsText(changeEvent.target.files[0]);
                     }
-                    reader.readAsText(changeEvent.target.files[0]);
+
                 });
             }
         };

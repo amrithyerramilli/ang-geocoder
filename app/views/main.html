@@ -2,43 +2,30 @@
     <div class="panel-body">
         <input type="file" file-reader="uploadedFile" />
         <hr />
-        <button class="btn btn-success" ng-click="uploadFile()">Upload</button>
+        <button class="btn btn-success" ng-disabled="uploadDisabled()" ng-click="uploadFile()">Upload</button>
     </div>
 </div>
-<div class="panel panel-default">
+<!-- <div class="panel panel-default">
     <div class="panel-body">
         {{ uploadedFile || 'No data available' }}
     </div>
-</div>
-<div class="panel panel-default hide">
+</div> -->
+<!-- <div class="panel panel-default">
+    <div class="panel-body">
+        {{ angular.toJson($scope.parsedCsv) }}
+    </div>
+</div> -->
+<div class="panel panel-default">
     <div class="panel-body">
         <table class="table">
             <thead>
-                <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
-                </tr>
+                <!-- <tr>
+                    <th ng-repeat="header in parsedCsv[0]">{{header}}</th>                    
+                </tr> -->
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
+                <tr ng-repeat="row in parsedCsv track by $index">
+                    <td ng-repeat="col in row track by $index">{{ col }}</td>
                 </tr>
             </tbody>
         </table>

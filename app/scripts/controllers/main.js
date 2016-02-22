@@ -9,7 +9,7 @@
  */
 angular.module('angGeocoderApp')
     .controller('MainCtrl', function($scope, $log, $rootScope, utils) {
-
+        $rootScope.currentStep = 1;
         function uploadFile() {
             $rootScope.detailsData = null;
             $scope.parsedCsv = utils.processData($scope.uploadedFile);

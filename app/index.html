@@ -35,10 +35,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#/">Home</a></li>
-            <li><a href="#/details">Details</a></li>
-            <li><a href="#/about">About</a></li>
-            <li><a href="#/contact">Contact</a></li>
+            <li ng-class="{'active' : currentStep == 1}"><a href="#/">Home</a></li>
+            <li ng-class="{'active' : currentStep == 2}"><a href="#/details">Details</a></li>
+            <li ng-class="{'active' : currentStep == 3}"><a href="#/about">About</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -65,7 +64,6 @@
     ga('create', 'UA-XXXXX-X');
     ga('send', 'pageview');
     </script>
-    <script src='bower_components/lodash/dist/lodash.min.js'></script>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -77,10 +75,11 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
     <!-- endbower -->
-    <!-- endbuild -->
-    <script src='bower_components/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
-    <script src='bower_components/angular-google-maps/dist/angular-google-maps.min.js'></script>
+    <!-- endbuild -->    
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>

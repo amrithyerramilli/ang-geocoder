@@ -8,8 +8,7 @@
  * Factory in the angGeocoderApp.
  */
 angular.module('angGeocoderApp')
-    .factory('utils', function($q, geocoder) {
-
+    .factory('utils', function($q, $log, geocoder) {
 
         function myAddress(input) {
             var self = this;
@@ -20,10 +19,9 @@ angular.module('angGeocoderApp')
             self.streetName = input[4];
             self.city = input[5];
             self.country = input[6];
-
-            self.addressString = function() {
-                return [self.houseNumber, self.streetName, self.city, self.country].join(' ')
-            }
+            self.addressString = [self.houseNumber, self.streetName, self.city, self.country].join(' ');
+            self.isInvalid = false;
+            self.validationMessage = '';            
         }
 
         function checkRequiredProperties(data) {
@@ -31,6 +29,8 @@ angular.module('angGeocoderApp')
             for (var i = 0; i < requiredProperties.length; i++) {
                 var requiredProperty = requiredProperties[i];
                 if (!data[requiredProperty]) {
+                    data.isInvalid = true;
+                    data.validationMessage = requiredProperty + ' is required';
                     return false;
                 }
             }
@@ -60,26 +60,19 @@ angular.module('angGeocoderApp')
             return lines;
         }
 
-
-
         function generateGeocodes(data) {
 
+            // use a loop along with callbacks (promises)
+            // Hail StackOverflow : http://stackoverflow.com/a/34662434
+
             var allThings = data.map(function(row) {
-                var p = geocoder.geocode(row.addressString());
+                var p = geocoder.geocode(row.addressString);
                 return p.then(function(data) {
                     row.coordinates = data;
                 }, function(err) {
                     row.coordinates = data;
                 });
-            })
-            // var allGeocodePromises = [];
-
-            // for (var i = 0; i < data.length; i++) {
-            //     var x = geocoder.geocode(data[i].addressString());
-            //     x.then(data[i].setGeoData, data[i].setGeoData);
-
-            //     allGeocodePromises.push(x);
-            // }
+            });
 
             return $q.all(allThings);
         }

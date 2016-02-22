@@ -9,6 +9,7 @@
  */
 angular.module('angGeocoderApp')
     .controller('MainCtrl', function($scope, $log, $rootScope, utils, $location) {
+<<<<<<< HEAD
         $rootScope.currentStep = 1; // for navbar
 
         $scope.uploadedFile = null;
@@ -23,11 +24,14 @@ angular.module('angGeocoderApp')
             else
                 $scope.uploadDisabled = true;
         });
+=======
+>>>>>>> origin/master
 
         function uploadFile() {
             $rootScope.geocodedData = null;
             $scope.parsedCsv = utils.processData($scope.uploadedFile);
             if (utils.validateSchema($scope.parsedCsv)) {
+<<<<<<< HEAD
                 $log.info('validation successful. generating geocoded lat/lon');
 
                 $scope.showValidationErrors = false;
@@ -37,16 +41,30 @@ angular.module('angGeocoderApp')
                         $log.info('aal izz well, going to next step');
                         $rootScope.geocodedData = $scope.parsedCsv;
                         $location.path('/details');
+=======
+
+                alert('validation successful. generating geocoded lat/lon');
+
+                utils.generateGeocodes($scope.parsedCsv)
+                    .then(function() {
+                        // all ok
+                        $log.info('aal izz well, need to go to next step');
+                        $rootScope.detailsData = $scope.parsedCsv;
                         // alert("geolocation info successful, please go to details screen");
                         $location.url("/details");
+>>>>>>> origin/master
                     }, function(err) {
                         $log.error('oops, geocode fail macha');
                         $log.error(err);
                     });
             } else {
+<<<<<<< HEAD
                 $scope.showValidationErrors = true;
                 $log.log($scope.parsedCsv);
                 $log.log('validation failed.');
+=======
+                alert('validation failed'); // TODO : display validation errors and stay on same page.
+>>>>>>> origin/master
             }
         }
     });

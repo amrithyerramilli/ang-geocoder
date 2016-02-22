@@ -1,3 +1,4 @@
+<div class="alert alert-danger" role="alert" ng-if="!isValid">Uh oh, looks like you skipped step 1. Please upload the file in <a href="#/">step 1</a></div>
 <div class="col-md-12">
     <div class="col-md-6">
         <table class="table">
@@ -14,7 +15,7 @@
         </table>
     </div>
     <div class="col-md-6">
-        <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+        <ui-gmap-google-map center='map.center' zoom='map.zoom' ng-if="isValid">
             <ui-gmap-markers models="detailsData" coords="'coordinates'" idkey="'id'" fit="true" icon="'icon'">
             </ui-gmap-markers>
         </ui-gmap-google-map>

@@ -13,6 +13,8 @@
                 </tr>
             </tbody>
         </table>
+
+        <button class="btn btn-success" ng-click="downloadFile()" ng-if="isValid">Download</button>        
     </div>
     <div class="col-md-6">
         <ui-gmap-google-map center='map.center' zoom='map.zoom' ng-if="isValid">

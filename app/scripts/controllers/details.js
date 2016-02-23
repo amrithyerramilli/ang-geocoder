@@ -8,7 +8,7 @@
  * Controller of the angGeocoderApp
  */
 angular.module('angGeocoderApp')
-    .controller('DetailsCtrl', function($rootScope, $scope, uiGmapGoogleMapApi) {
+    .controller('DetailsCtrl', function($rootScope, $scope, uiGmapGoogleMapApi, utils) {
         $rootScope.currentStep = 2;
         $scope.isValid = $rootScope.geocodedData != null;
         $scope.myInfoWindow = null;
@@ -28,7 +28,20 @@ angular.module('angGeocoderApp')
             model.show = !model.show;
         };
 
+        $scope.downloadFile = downloadFile;
 
-        // $scope.detailsData = $rootScope.detailsData;
-        // $scope.detailsData = angular.fromJson('[{"id":"1","firstName":"A","lastName":"Y","houseNumber":"B6","streetName":"L&T South City","city":"Bangalore","country":"India","coordinates":{"latitude":12.8878047,"longitude":77.5913984}},{"id":"2","firstName":"S","lastName":"Y","houseNumber":"2","streetName":"L&T","city":"Bangalore","country":"India","coordinates":{"latitude":12.8245676,"longitude":77.67465229999993}}]'); // mocking temporarily
+        function downloadFile() {
+            console.log($scope.detailsData);
+            // var csvString = utils.convertToCsv($scope.detailsData);
+
+            var csvString = "Id,First Name,Last Name,House Number,Street Name,City,Country\n1,A,Y,B6,L&T South City,Bangalore,India\n2,S,Y,2,L&T,Bangalore,India";
+
+            // using HTML5 download attribute
+            var a = angular.element('<a/>');
+            a.attr({
+              href : 'data:attachment/csv;charset=utf-8,' + encodeURI(csvString),  
+              target : '_blank',
+              download : 'downloaded geocodes.csv'
+            })[0].click();
+        }        
     });

@@ -21,7 +21,7 @@ angular.module('angGeocoderApp')
             self.country = input[6];
             self.addressString = [self.houseNumber, self.streetName, self.city, self.country].join(' ');
             self.isInvalid = false;
-            self.validationMessage = '';            
+            self.validationMessage = '';
         }
 
         function checkRequiredProperties(data) {
@@ -77,10 +77,25 @@ angular.module('angGeocoderApp')
             return $q.all(allThings);
         }
 
+        function convertToCsv(data) {            
+            var separator = ",";
+            
+            var headers = ["Id", "First Name", "Last Name", "Address", "Latitude", "Longitude"];
+            var stringData = "";
+            stringData += headers.join(separator) + "\n";
+            
+            for (var i = 0; i < data.length; i++) {
+                var row = data[i];
+                stringData += [row.id, row.firstName, row.lastName, row.addressString, row.coordinates.latitude, row.coordinates.longitude].join(separator) + "\n";
+            }
+            return stringData;
+        }
+
         // Public API here
         return {
             processData: processData,
             validateSchema: validateSchema,
-            generateGeocodes: generateGeocodes
+            generateGeocodes: generateGeocodes,
+            convertToCsv: convertToCsv
         };
     });

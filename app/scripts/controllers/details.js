@@ -31,11 +31,7 @@ angular.module('angGeocoderApp')
         $scope.downloadFile = downloadFile;
 
         function downloadFile() {
-            console.log($scope.detailsData);
-            // var csvString = utils.convertToCsv($scope.detailsData);
-
-            var csvString = "Id,First Name,Last Name,House Number,Street Name,City,Country\n1,A,Y,B6,L&T South City,Bangalore,India\n2,S,Y,2,L&T,Bangalore,India";
-
+            var csvString = utils.convertToCsv($scope.detailsData);
             // using HTML5 download attribute
             var a = angular.element('<a/>');
             a.attr({

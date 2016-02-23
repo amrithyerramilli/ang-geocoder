@@ -16,7 +16,10 @@
     </div>
     <div class="col-md-6">
         <ui-gmap-google-map center='map.center' zoom='map.zoom' ng-if="isValid">
-            <ui-gmap-markers models="detailsData" coords="'coordinates'" idkey="'id'" fit="true" icon="'icon'">
+            <ui-gmap-markers models="detailsData" coords="'coordinates'" idkey="'id'" fit="true" icon="'icon'" options="markerOptions" click="showMarkerInfo">
+                <ui-gmap-windows show="show">
+                    <div ng-non-bindable>info - {{id}}</div>
+                </ui-gmap-windows>
             </ui-gmap-markers>
         </ui-gmap-google-map>
     </div>

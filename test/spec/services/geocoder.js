@@ -1,18 +1,18 @@
-// 'use strict';
+'use strict';
 
-// describe('Service: geocoder', function () {
+describe('Service: geocoder', function () {
 
-//   // load the service's module
-//   beforeEach(module('angGeocoderApp'));
+  // load the service's module
+  beforeEach(module('angGeocoderApp'));
 
-//   // instantiate service
-//   var geocoder;
-//   beforeEach(inject(function (_geocoder_) {
-//     geocoder = _geocoder_;
-//   }));
+  // instantiate service
+  var geocoder;
+  beforeEach(inject(function (_geocoder_) {
+    geocoder = _geocoder_;
+  }));
 
-//   it('should do something', function () {
-//     expect(!!geocoder).toBe(true);
-//   });
+  it('should do something', function () {
+    expect(!!geocoder).toBe(true);
+  });
 
-// });
+});

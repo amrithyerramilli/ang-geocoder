@@ -1,15 +1,15 @@
 <div class="alert alert-danger" role="alert" ng-if="!isValid">Uh oh, looks like you skipped step 1. Please upload the file in <a href="#/">step 1</a></div>
-<div class="col-md-12">
+<div class="row">
     <div class="col-md-6">
-        <table class="table">
-            <!-- <thead>
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
                 <tr>
                     <th ng-repeat="header in parsedCsv[0]">{{header}}</th>
                 </tr>
-            </thead> -->
+            </thead>
             <tbody>
                 <tr ng-repeat="row in detailsData track by $index">
-                    <td ng-repeat="col in row track by $index">{{ col }}</td>
+                    <td ng-repeat="col in row track by $index" ng-if="[0, 1, 2, 7, 10].indexOf($index) > -1">{{ col }}</td>
                 </tr>
             </tbody>
         </table>

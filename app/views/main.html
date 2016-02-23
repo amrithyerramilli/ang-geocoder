@@ -16,7 +16,7 @@
                 </tr>
             </thead> -->
             <tbody>
-                <tr ng-repeat="row in parsedCsv track by $index" ng-class="{'text-danger' : row.isInvalid}">                    
+                <tr ng-repeat="row in parsedCsv track by $index" ng-class="{'warning' : row.isInvalid}">                    
                     <td ng-repeat="col in row track by $index" ng-if="$index != 7 && $index != 8">{{ col }}</td>
                 </tr>
             </tbody>
